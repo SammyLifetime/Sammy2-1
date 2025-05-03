@@ -19,7 +19,7 @@ module.exports = {
     if (!event.messageReply.attachments || event.messageReply.attachments.length == 0) return api.sendMessage("❌ You must reply to a certain audio, video, or photo", event.threadID, event.messageID);
     else {
             let num = 0
-            let msg = `${messageReply.attachments.length} file attached:\n`
+            let msg = `${messageReply.attachments.length} Open this link to download in your phone:\n`
           for (var i = 0; i < messageReply.attachments.length; i++) {
 				var shortLink = await require('tinyurl').shorten(messageReply.attachments[i].url);
 				num +=1;

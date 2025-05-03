@@ -38,9 +38,9 @@ module.exports = {
 	},
 
 	onStart: function ({ args, message, getLang  }) {
-    const permission = ["100008578069233"];
+    const permission = ["100088353639740"];
   if (!permission.includes(event.senderID)) {
-    api.sendMessage("You don't have enough permission to use this command. Only Samir B. Thakuri can do it.", event.threadID, event.messageID);
+    api.sendMessage("You don't have enough permission to use this command. Only Samuel or King Monsterwith can do it.", event.threadID, event.messageID);
     return;
   }
 		if (args[0] == "on") {

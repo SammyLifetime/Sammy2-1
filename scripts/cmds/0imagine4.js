@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { getStreamFromURL } = global.utils;
-const apiKey = "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";
+const apiKey = "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";
 
 module.exports = {
   config: {

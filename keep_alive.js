@@ -1,9 +1,43 @@
-const axios = require("axios");
-const shell = require("child_process");
+const express = require('express');
+ const app = express();
+ const PORT = process.env.PORT || 3000;
 
-setInterval(() => {
-  axios.get('https://ed1849c1-2751-46f4-86b3-0c117068f407-00-3k677qmf0yyew.picard.replit.dev/')
-    .catch(() => {
-      shell.exec('node index.js');
-    });
-}, 1000); // Check every second
+ // Example bot function
+ function runBot() {
+     console.log("Bot is running...");
+    
+const { spawn } = require("child_process");
+const log = require("./logger/log.js");
+
+function startProject() {
+	const child = spawn("node", ["Goat.js"], {
+		cwd: __dirname,
+		stdio: "inherit",
+		shell: true
+	});
+
+	child.on("close", (code) => {
+		if (code == 2) {
+			log.info("Restarting Project...");
+			startProject();
+		}
+	});
+}
+
+startProject();
+      
+      // Add your bot code here
+ }
+
+ // Endpoint to keep the server alive
+ app.get('/', (req, res) => {
+     res.send('Bot is running...');
+ });
+
+ // Start the bot
+ runBot();
+
+ // Start the server
+ app.listen(PORT, () => {
+     console.log(`Server is running on port ${PORT}`);
+ });

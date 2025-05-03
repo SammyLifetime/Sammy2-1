@@ -28,7 +28,7 @@ module.exports = {
         approvedIDs.push(id);
         fs.writeFileSync(approvedIDsPath, JSON.stringify(approvedIDs));
         api.sendMessage(`╔════ஜ۩۞۩ஜ═══╗\n\n📌 Request Accepted📌\nyour request has been approved by BotAdmin\nNow all NSFW commands will work for this thread.\n\nMessage from admin: ${messageFromAdmin}\n\n╚════ஜ۩۞۩ஜ═══╝`, id);
-        message.reply("╔════ஜ۩۞۩ஜ═══╗\n\nThis Thread has been approved now to use NSFW command\n\n If you don't know how to use this bot then join the Marin support Box \nType : sammygc\nto join.\n\n╚════ஜ۩۞۩ஜ═══╝");
+        message.reply("╔════ஜ۩۞۩ஜ═══╗\n\nThis Thread has been approved now to use NSFW command\n\n If you don't know how to use this bot then join the Sammy support Box \nType : sammygc\nto join.\n\n╚════ஜ۩۞۩ஜ═══╝");
 
         // Remove from pending IDs list
         let pendingIDs = JSON.parse(fs.readFileSync(pendingIDsPath));

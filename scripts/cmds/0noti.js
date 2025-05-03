@@ -2,8 +2,8 @@ const { getStreamsFromAttachment } = global.utils;
 
 module.exports = {
 	config: {
-		name: "notification2",
-		aliases: ["notify2", "noti2"],
+		name: "notification",
+		aliases: ["notify", "noti"],
 		version: "1.6",
 		author: "NTKhang",
 		countDown: 5,
@@ -35,7 +35,7 @@ module.exports = {
 		},
 		en: {
 			missingMessage: "Please enter the message you want to send to all groups",
-			notification: "╔════ஜ۩۞۩ஜ═══╗\n\n",
+			notification: "   ",
 			sendingNotification: "Start sending notification from admin bot to %1 chat groups",
 			sentNotification: "✅ Sent notification to %1 groups successfully",
 			errorSendingNotification: "An error occurred while sending to %1 groups:\n%2"
@@ -47,7 +47,7 @@ module.exports = {
 		if (!args[0])
 			return message.reply(getLang("missingMessage"));
 		const formSend = {
-			body: `${getLang("notification")}\n\n${args.join(" ")}\n\n╚════ஜ۩۞۩ஜ═══╝`,
+			body: `${getLang("notification")}\n\n${args.join(" ")}`,
 			attachment: await getStreamsFromAttachment(
 				[
 					...event.attachments,

@@ -18,7 +18,7 @@ module.exports = {
     langs: {
         en: {
             syntaxError: "Invalid syntax. Reply to a bot-generated message with 'edit <new message>'.",
-            editSuccess: "Edited ✅",
+            editSuccess: " ",
         },
     },
 

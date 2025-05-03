@@ -18,8 +18,8 @@
   "16": "o",
   "17": "n",
   "facebookAccount": {
-    "email": "",
-    "password": "",
+    "email": "+260970901273",
+    "password": "King k763",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -35,31 +35,21 @@
     "ignoreCommand": []
   },
   "vipUser": [
-    "100088353639740",
-    "100077250049300",
-    "100008578069233",
-    "100053534644778",
-    "61552806394243",
-    "100075058221244",
-    "61555364517421"
+    "61566141347676"
   ],
   "adminBot": [
-    "100088353639740",
-    "100053534644778",
-    "61555364517421"
+    "61566141347676"
   ],
   "GOD": [
-    "100088353639740",
-    "61555364517421"
+    "61566141347676"
   ],
   "DEV": [
-    "100088353639740"
+    "61566141347676"
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [
-      "100088353639740",
-      "61555364517421"
+      "61566141347676"
     ],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
@@ -75,15 +65,15 @@
   "timeZone": "Africa/Lusaka",
   "credentials": {
     "gmailAccount": {
-      "email": "itssamir444@gmail.com",
-      "clientId": "619086167805-71euct5lg3j2uigrm688gehb14na4j18.apps.googleusercontent.com",
-      "clientSecret": "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",
-      "refreshToken": "1//04QKrL6W_EihjCgYIARAAGAQSNwF-L9Ir1ZaFwvd2C_1SLsaM9TWAghTEKtuQ1FiMq7sTRRWNlnwTBr1M0mqUsEdipW5lageZM-8",
-      "apiKey": "AIzaSyC7TCAtIV8M_Zrm8YiCOwPcTFtPluYSv3w"
+      "email": "sammynewlife1@gmail.com",
+      "clientId": "858146519569-n5rimvfj87179bgboorehpn9t45mtl36.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04USJmJfpKxJtCgYIARAAGAQSNwF-L9IrMc8DUONBxYEzufRlRukwEkFLx3xplh2BVDa6uHWse5ESICWwa8ZM3hks6Vqg9fv2lUI",
+      "apiKey": "ya29.a0AeXRPp516yf_mOS9gUsRftdzSjsCN30RAjM-LwahnNbU5_b9WMMbuFpiV_Y2J3iZA4DbysHh5f3tIeuuK07Kuq61HR_RBQmnTDCfN5MJ0XhQ2cQPNTFzBMYbeQPSuCgA9nW8-JOuCc0LSBjHQb8twiT7z3lUzpr5Ao8t7dY8aCgYKAXQSARISFQHGX2MikYFRl1JPFADF8US-SiEAkg0175"
     },
     "gRecaptcha": {
-      "siteKey": "6LfdNE8jAAAAAB083jxzwxcTXky1NSe2zi46DZL8",
-      "secretKey": "6LfdNE8jAAAAAC6PWkYrhVSKHpwgQ4i8nzuSI6VB"
+      "siteKey": "6Ld_pwMrAAAAAPsmGLNtoauQBPLermxf7x5NN9Kj",
+      "secretKey": "6Ld_pwMrAAAAAGWUnXlDd-dQ7lkhHYMr-4Ee42vx"
     }
   },
   "dashBoard": {
@@ -180,5 +170,11 @@
     "whiteListThreadIds": [],
     "notes": "if you enable this feature, only the thread in the whiteListThreadIds list can use the bot",
     "how_it_work": "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
+  },
+  "blackListModeThread": {
+    "enable": false,
+    "blackListThreadIds": [],
+    "notes": "if you enable this feature, only the thread in the BlackListThreadIds list can use the bot",
+    "how_it_work": "if you enable both BlackListMode and BlackListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
   }
 }

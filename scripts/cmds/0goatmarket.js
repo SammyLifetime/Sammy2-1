@@ -14,7 +14,7 @@ module.exports = {
     author: "LiANE",
   },
   onStart: async ({ api, event, args, message }) => {
-    const serverURL = "https://goatmart.nealianacagara.repl.co";
+    const serverURL = "https://Sammy-market.replit.app";
 
     try {
       if (!args[0]) {

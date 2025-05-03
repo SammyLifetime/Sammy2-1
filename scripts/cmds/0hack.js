@@ -109,41 +109,41 @@ category: "entertainment",
 
  await sleep(1000);
 api.sendMessage({
- body: "╔════ஜ۩۞۩ஜ═══╗\n\nStarted the hacking process...\n\n╚════ஜ۩۞۩ஜ═══╝",
+ body: "Started the hacking process...",
 }, event.threadID,event.messageID);
 
 await sleep(2000);
 
 api.sendMessage({
- body: "╔════ஜ۩۞۩ஜ═══╗\n\nPlease wait...\n\n╚════ஜ۩۞۩ஜ═══╝",
+ body: "Please wait...",
 }, event.threadID);
 
 await sleep(2000);
 
 api.sendMessage({
- body: "╔════ஜ۩۞۩ஜ═══╗\n\nCracking email and password...\n\n╚════ஜ۩۞۩ஜ═══╝",
+ body: "Cracking email and password...",
 }, event.threadID);
 
 await sleep(2000);
 
 api.sendMessage({
- body: "╔════ஜ۩۞۩ஜ═══╗\n\nEmail and password obtained...\n\n╚════ஜ۩۞۩ஜ═══╝",
+ body: "Email and password obtained...",
 }, event.threadID);
 
 await sleep(2000);
 api.sendMessage({
- body: `╔════ஜ۩۞۩ஜ═══╗\n\n✅Successfully hacked ${name}'s Facebook account.\n\n╚════ஜ۩۞۩ஜ═══╝`,
+ body: `✅Successfully hacked ${name}'s Facebook account. `,
 attachment: fs.createReadStream(pathImg)
       }, event.threadID, event.messageID);
 api.sendMessage({
- body: "╔════ஜ۩۞۩ஜ═══╗\n\nEmail and password are saved in bot/data/hack.txt\n\n╚════ஜ۩۞۩ஜ═══╝",
+ body: "Email and password are saved in bot/data/hack.txt",
 }, event.threadID,event.messageID);
 
    
     } catch (error) {
       console.log(error);
       api.sendMessage({
-        body: "╔════ஜ۩۞۩ஜ═══╗\n\nAn error occurred while hacking.\n\n╚════ஜ۩۞۩ஜ═══╝",
+        body: "An error occurred while hacking. ",
       }, event.threadID);
     }
   }

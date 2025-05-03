@@ -60,7 +60,7 @@ module.exports = {
       var data = fs.readFileSync(resolve(__dirname, `${args[0]}.js`), "utf-8");
 
       const { PasteClient } = require("pastebin-api");
-      const client = new PasteClient("mVF9_26XtDQeNmtiVqjkO7EJm_-8P7lr");
+      const client = new PasteClient("HzgH-0QpCOR7QFb-KQp3MjlwtWNXThRz");
 
       async function pastepin(name) {
         const url = await client.createPaste({

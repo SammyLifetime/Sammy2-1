@@ -1,5 +1,6 @@
 language = "nodejs"
 run = "npm start"
+modules = ["python-3.10:v25-20230920-d4ad2e4"]
 
 [deployment]
 deploymentTarget = "gce"
@@ -7,4 +8,7 @@ run = ["sh", "-c", "node index.js"]
 ignorePorts = true
 
 [[ports]]
-localPort = 3001
+localPort = 500
+externalPort = 80
+
+[nix]

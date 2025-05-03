@@ -1,57 +1,37 @@
 const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
-const KievRPSSecAuth = "1HStTozEza0F12kig1jTZ1YwF5KMUTJb21UB20QR8Ff0X46rAZ8Lmi_L6VQcTs4ikCq_YNQBsI3RYKz12oRq7ZE0MSK-hrjCWiU8XatIJtR5ARs7qy4fONigJL26OwyrwNxB_QGyYSWZwpEl6cKhZ3vjpGAQ8ltpQrDjyIUOzMTNrGdydxSKl8VMOt4kwl7DcqTCQjkng0DFBUjycr2-im0v7eJS5LTFo3AGoOXTFYQ0";
-const _U = "1HStTozEza0F12kig1jTZ1YwF5KMUTJb21UB20QR8Ff0X46rAZ8Lmi_L6VQcTs4ikCq_YNQBsI3RYKz12oRq7ZE0MSK-hrjCWiU8XatIJtR5ARs7qy4fONigJL26OwyrwNxB_QGyYSWZwpEl6cKhZ3vjpGAQ8ltpQrDjyIUOzMTNrGdydxSKl8VMOt4kwl7DcqTCQjkng0DFBUjycr2-im0v7eJS5LTFo3AGoOXTFYQ0";
+const KievRPSSecAuth = "1M2yqFHag_vRNRjUUyMgh6jmd8_ASRqAqozZ71aDZOMxhW1eRey1j7jtWK4h_u8yGCaUsglBwTyICC_EX2ZUrOSWFdIQv4EGWuH8Ax5snO8iZJrSqRiHr12x_nB26Jbk56E38OquQaju3RGPJyX9tg55525x9JePBop1oI0HJaMe_Qsi3TLAuPgvZNR_Il7Ygkj9zeEq6eRG7Cn6MyCB30kO2Docame7vR2K1bKgix-8";
+const _U = "1M2yqFHag_vRNRjUUyMgh6jmd8_ASRqAqozZ71aDZOMxhW1eRey1j7jtWK4h_u8yGCaUsglBwTyICC_EX2ZUrOSWFdIQv4EGWuH8Ax5snO8iZJrSqRiHr12x_nB26Jbk56E38OquQaju3RGPJyX9tg55525x9JePBop1oI0HJaMe_Qsi3TLAuPgvZNR_Il7Ygkj9zeEq6eRG7Cn6MyCB30kO2Docame7vR2K1bKgix-8";
+
 module.exports = {
   config: {
     name: "dalle",
-    aliases: ["dalle3"],
     version: "1.0.2",
-    author: "Siam/King Monsterwith ",
+    author: "Samir Œ ",
     role: 0,
     countDown: 5,
-    shortDescription: {
-      en: "dalle"
-    },
-    longDescription: {
-      en: ""
-    },
-    category: "dalle",
-    guide: {
-      en: "{prefix}dalle <search query> -<number of images>"
-    }
+    shortDescription: { en: "dalle3 image generator" },
+    longDescription: { en: "dalle3 is a image generator powdered by OpenAi" },
+    category: "𝗔𝗜",
+    guide: { en: "{prefix}dalle <search query>" }
   },
 
   onStart: async function ({ api, event, args }) {
-
-const uid = event.senderID
-    const permission = [`${uid}`];
-    if (!permission.includes(event.senderID)) {
-      api.sendMessage(
-        "You don't have enough permission to use this command. Only admin can do it.",
-        event.threadID,
-        event.messageID
-      );
-      return;
-    }
-
-    const keySearch = args.join(" ");
-    const indexOfHyphen = keySearch.indexOf('-');
-    const keySearchs = indexOfHyphen !== -1 ? keySearch.substr(0, indexOfHyphen).trim() : keySearch.trim();
-    const numberSearch = parseInt(keySearch.split("-").pop().trim()) || 4;
+    const prompt = args.join(" ");
 
     try {
-      const res = await axios.get(`https://api-dalle-gen.onrender.com/dalle3?auth_cookie_U=${_U}&auth_cookie_KievRPSSecAuth=${KievRPSSecAuth}&prompt=${encodeURIComponent(keySearchs)}`);
+      const res = await axios.get(`https://apis-dalle-gen.onrender.com/dalle3?auth_cookie_U=${_U}&auth_cookie_KievRPSSecAuth=${KievRPSSecAuth}&prompt=${encodeURIComponent(prompt)}`);
       const data = res.data.results.images;
 
       if (!data || data.length === 0) {
-        api.sendMessage("No images found for the provided query.", event.threadID, event.messageID);
+        api.sendMessage("response received but imgurl are missing ", event.threadID, event.messageID);
         return;
       }
 
       const imgData = [];
-      for (let i = 0; i < Math.min(numberSearch, data.length); i++) {
+
+      for (let i = 0; i < Math.min(4, data.length); i++) {
         const imgResponse = await axios.get(data[i].url, { responseType: 'arraybuffer' });
         const imgPath = path.join(__dirname, 'cache', `${i + 1}.jpg`);
         await fs.outputFile(imgPath, imgResponse.data);
@@ -60,14 +40,11 @@ const uid = event.senderID
 
       await api.sendMessage({
         attachment: imgData,
-        body: `Here's your generated image✅`
+        body: `Here's your generated image`
       }, event.threadID, event.messageID);
 
     } catch (error) {
-      console.error(error);
-      api.sendMessage("cookie of the command. Is expired", event.threadID, event.messageID);
-    } finally {
-      await fs.remove(path.join(__dirname, 'cache'));
+      api.sendMessage("Can't Full Fill this request ", event.threadID, event.messageID);
     }
   }
 };
