@@ -22,7 +22,7 @@ const Canvas = defaultRequire("canvas");
 const https = defaultRequire("https");
 
 async function getName(userID) {
-   return "NEXXO ☠️"; // I will set the working functions if i got 100 follower IN my github soo plz follow me: https://github.com/Varnosbit/ here.
+   return "King Monsterwith 👑"; // I will set the working functions if i got 100 follower IN my github soo plz follow me: https://github.com/Monsterwith/ here.
 }
 
 const { writeFileSync, readFileSync, existsSync, watch } = require("fs-extra");
@@ -862,7 +862,7 @@ async function startBot(loginWithEmail) {
 					log.master("ADMINBOT", `[${++i}] ${uid}`);
 				}
 			}
-			log.master("NOTIFICATION", ("This source edited by Allou Mohamed. Follow Me HEre https://github.com/Varnosbit").trim());
+			log.master("NOTIFICATION", ("This source edited by Monsterwith. Follow Me Here https://github.com/Monsterwith").trim());
 			log.master("SUCCESS", getText('login', 'runBot'));
 			log.master("LOAD TIME", `${convertTime(Date.now() - global.GoatBot.startTime)}`);
 			logColor("#f5ab00", createLine("COPYRIGHT"));
