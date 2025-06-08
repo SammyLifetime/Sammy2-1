@@ -95,7 +95,7 @@ else {
 	subTitleArray.push(subTitle);
 }
 const author = ("Created by NTKhang and Fixed By NEXXO.");
-const srcUrl = ("Source code: https://github.com/ntkhang03/Goat-Bot-V2 | Edited and fixed on https://github.com/nexo-here/GoatBot-Fixed");
+const srcUrl = ("Source code: https://github.com/ntkhang03/Goat-Bot-V2 | Edited and fixed on https://github.com/Monsterwith/076p");
 const fakeRelease = ("ALL VERSIONS NOT RELEASED HERE ARE FAKE");
 for (const t of subTitleArray) {
 	const textColor2 = gradient("#9F98E8", "#AFF6CF")(t);
