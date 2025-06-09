@@ -13,7 +13,7 @@ function delay(ms) {
 }
 
 async function delayRandom() {
-  const ms = 1000 + Math.floor(Math.random() * 2000); // 1-3 সেকেন্ড random delay
+  const ms = 1000 + Math.floor(Math.random() * 2000); // 1-3 Seconds random delay
   return delay(ms);
 }
 
@@ -166,7 +166,7 @@ function buildAPI(globalOptions, html, jar) {
   return [ctx, defaultFuncs, api];
 }
 
-// 🔁 Modified by NEXXO ☠️
+// 🔁 Modified by King Monsterwith 
 async function safeApiCall(apiFunc, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
     try {
