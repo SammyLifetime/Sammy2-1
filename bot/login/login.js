@@ -94,7 +94,7 @@ if (subTitle.length > maxWidth) {
 else {
 	subTitleArray.push(subTitle);
 }
-const author = ("Created by NTKhang and Fixed By NEXXO.");
+const author = ("Created by NTKhang and Fixed By King Monsterwith");
 const srcUrl = ("Source code: https://github.com/ntkhang03/Goat-Bot-V2 | Edited and fixed on https://github.com/Monsterwith/076p");
 const fakeRelease = ("ALL VERSIONS NOT RELEASED HERE ARE FAKE");
 for (const t of subTitleArray) {
