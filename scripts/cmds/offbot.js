@@ -11,7 +11,7 @@ module.exports = {
     guide: "{p}{n}"
   },
   onStart: async function ({event, api}) {
-    const permission = [ "100088353639740",
+    const permission = [ "61575847331340",
     "100090034473716",
     "100089212096387",
     "100071743848974",
