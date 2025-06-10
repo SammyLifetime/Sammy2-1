@@ -5,7 +5,7 @@ const moment = require('moment-timezone');
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
 const currentTime = moment().tz('Africa/Lusaka').format('HH:mm:ss');
-const doNotDelete = `[ ${currentTime} ]`;
+const doNotDelete = `[ The current time in Zambia ${currentTime} ]`;
 const characters = "━━━━━━━━━━━━━━━━━━━━━━";
 /** 
 * @author NTKhang
