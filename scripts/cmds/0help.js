@@ -1,9 +1,11 @@
 const fs = require("fs-extra");
 const axios = require("axios");
 const path = require("path");
+const moment = require('moment-timezone');
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ 🐐 | Goat Bot V2 ]";
+const currentTime = moment().tz('Africa/Lusaka').format('HH:mm:ss');
+const doNotDelete = `[ ${currentTime} ]`;
 const characters = "━━━━━━━━━━━━━━━━━━━━━━";
 /** 
 * @author NTKhang
