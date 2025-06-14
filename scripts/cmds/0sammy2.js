@@ -22,7 +22,7 @@ module.exports = {
     version: "1.2",
     author: "NTKhang/ modified by Monsterwith",
     countDown: 1,
-    role: 2,
+    role: 0,
     shortDescription: {
       vi: "sammy chat",
       en: "sammy chat"
