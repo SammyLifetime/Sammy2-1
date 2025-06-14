@@ -177,7 +177,7 @@ async function handleGpt(event, message, args, getLang, commandName) {
     const text = response.data.choices[0].message.content;
 
     openAIHistory[event.senderID].push({
-      role: 'assintant',
+      role: 'assistant',
       content: text
     });
 
