@@ -18,8 +18,8 @@
   "16": "o",
   "17": "n",
   "facebookAccount": {
-    "email": "",
-    "password": "",
+    "email": "sammynewlife7@gmail.com",
+    "password": "King k763",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -35,16 +35,16 @@
     "ignoreCommand": []
   },
   "vipUser": [
-    "61575847331340"
+    "61566141347676"
   ],
   "adminBot": [
-    "61575847331340"
+    "61566141347676"
   ],
   "GOD": [
-    "61575847331340"
+    "61566141347676"
   ],
   "DEV": [
-    "61575847331340"
+    "61566141347676"
   ],
   "whiteListMode": {
     "enable": false,
@@ -83,7 +83,7 @@
   },
   "serverUptime": {
     "enable": true,
-    "port": 500,
+    "port": 3000,
     "socket": {
       "enable": true,
       "channelName": "uptime",
@@ -91,7 +91,7 @@
     }
   },
   "autoRestart": {
-    "time": false,
+    "time": 0,
     "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
   },
   "autoUptime": {
