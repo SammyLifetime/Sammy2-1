@@ -8,7 +8,7 @@ module.exports = {
   config: {
     name: "dalle",
     version: "1.0.2",
-    author: "Samir Œ ",
+    author: "Monsterwith",
     role: 0,
     countDown: 5,
     shortDescription: { en: "dalle3 image generator" },
