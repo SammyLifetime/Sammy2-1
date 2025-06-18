@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const Prefixes = ["Sammy", "sæmmy", "sammy", "@Sammy" ];
+const Prefixes = ["Sammy", "sæmmy", "sammy", "@Sammy " ];
 
 const fetch = require("node-fetch");
 
@@ -56,7 +56,7 @@ module.exports = {
   config: {
     name: "Sammy",
     version: "2.2.5",
-    author: "Shikaki | lance", // do not change
+    author: "Monsterwith", // do not change
     role: 0,
     category: "ai",
     shortDescription: {
