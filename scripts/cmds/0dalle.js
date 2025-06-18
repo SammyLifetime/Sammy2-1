@@ -21,7 +21,7 @@ module.exports = {
     const prompt = args.join(" ");
 
     try {
-      const res = await axios.get(`https://apis-dalle-gen.onrender.com/dalle3?auth_cookie_U=${_U}&auth_cookie_KievRPSSecAuth=${KievRPSSecAuth}&prompt=${encodeURIComponent(prompt)}`);
+      const res = await axios.get(`https://dalle3-uus9.onrender.com/dalle3?auth_cookie_U=${_U}&auth_cookie_KievRPSSecAuth=${KievRPSSecAuth}&prompt=${encodeURIComponent(prompt)}`);
       const data = res.data.results.images;
 
       if (!data || data.length === 0) {
