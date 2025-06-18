@@ -35,21 +35,26 @@
     "ignoreCommand": []
   },
   "vipUser": [
-    "61566141347676"
+    "61575847331340",
+    "61557662174248"
   ],
   "adminBot": [
-    "61566141347676"
+    "61575847331340",
+    "61557662174248"
   ],
   "GOD": [
-    "61566141347676"
+    "61575847331340",
+    "61557662174248"
   ],
   "DEV": [
-    "61566141347676"
+    "61575847331340",
+    "61557662174248"
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [
-      "61566141347676"
+      "61575847331340",
+      "61557662174248"
     ],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
