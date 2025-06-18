@@ -4,8 +4,8 @@ let lastQuery = "";
 
 module.exports = {
   config: {
-    name: "sammy2",
-    aliases: ["sæmmy2"],
+    name: "sammy3",
+    aliases: ["sæmmy3"],
     version: "1.0",
     author: "Samuel Kâñèñgeè",
     countDown: 5,
