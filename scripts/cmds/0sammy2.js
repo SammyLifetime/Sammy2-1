@@ -16,8 +16,8 @@ const { openAIUsing, openAIHistory } = global.temp;
 
 module.exports = {
   config: {
-    name: "sammy",
-    aliases: ["sæmmy"],
+    name: "sammy2",
+    aliases: ["sæmmy2"],
     usePrefix: false,
     version: "1.2",
     author: "NTKhang/ modified by Monsterwith",
