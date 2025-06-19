@@ -7,14 +7,14 @@ module.exports = {
     name: "imagine",
     aliases: ["imagine"],
     version: "1.0",
-    author: "Vex_Kshitiz",
+    author: "Monsterwith",
     countDown: 50,
     role: 0,
     longDescription: {
       vi: '',
       en: "Imagine"
     },
-    category: "ai",
+    category: "image",
     guide: {
       vi: '',
       en: "{pn} <prompt> - <ratio>"
@@ -35,7 +35,7 @@ module.exports = {
         }
       }
 
-      const response = await axios.get(`https://imagine-kshitiz-zia7.onrender.com/mj?prompt=${encodeURIComponent(prompt)}&ratio=${encodeURIComponent(ratio)}`);
+      const response = await axios.get(`https://king.up.railway.app/mj?prompt=${encodeURIComponent(prompt)}&ratio=${encodeURIComponent(ratio)}`);
       const imageUrls = response.data.imageUrls;
 
       const imgData = [];
