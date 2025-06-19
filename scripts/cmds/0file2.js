@@ -3,7 +3,7 @@ const path = require('path');
 
 module. exports = {
   config: {
-    name: "file",
+    name: "file2",
     author: "King Monsterwith",
     version: "1.7",
     countDown: 5,
