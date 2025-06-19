@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 module.exports = {
   config: {
     name: "imagine",
-    aliases: ["imagine"],
+    aliases: ["Imagine"],
     version: "1.0",
     author: "Monsterwith",
     countDown: 50,
@@ -52,7 +52,7 @@ module.exports = {
       await api.sendMessage({ body: '', attachment: imgData }, event.threadID, event.messageID);
     } catch (error) {
       console.error("Error:", error);
-      api.sendMessage("error contact kshitiz", event.threadID, event.messageID);
+      api.sendMessage("error contact Monsterwith", event.threadID, event.messageID);
     }
   }
 };
