@@ -27,7 +27,7 @@ function loadAliases() {
 
 module.exports = {
   config: {
-    name: "noprefix",
+    name: "noprefix2",
     version: "1.0",
     author: "LiANE/King Monsterwith",
     role: 2,
