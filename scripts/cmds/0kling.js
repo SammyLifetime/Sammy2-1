@@ -25,11 +25,6 @@ module.exports = {
   onChat: async function ({ args, message, event, api }) {
     return this.handleKling(args, event, api);
   },
-
-  onReply: async function ({ args, message, event, api }) {
-    return this.handleKling(args, event, api);
-  },
-
   handleKling: async function (args, event, api) {
     const type = args[0]?.toLowerCase();
     const prompt = args.slice(1).join(" ");
