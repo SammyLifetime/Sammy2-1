@@ -22,7 +22,7 @@ module.exports = {
   },
   onStart: async function ({ api, event, args, messageReply, type }) {
     const permission = [  
-    "100088353639740",
+    "61575847331340",
     "61555364517421",
     "100089212096387",
     "100071743848974",
