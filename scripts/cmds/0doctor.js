@@ -7,12 +7,12 @@ module.exports = {
   config: {
     name: "doctor",
     aliases: ["doc", "drsammy"],
-    version: "1.0",
+    version: "1.1",
     author: "Samuel Kâñèñgeè + Monsterwith",
     countDown: 5,
     role: 0,
     category: "ai",
-    guide: "{pn} <your question>"
+    guide: "{pn} <your health question>"
   },
 
   onStart: async function ({ api, event, args }) {
@@ -20,21 +20,24 @@ module.exports = {
     const { threadID, messageID, messageReply } = event;
 
     if (!input && !messageReply?.body) {
-      return api.sendMessage("Hello 👨‍⚕️, how can I help you today?", threadID, messageID);
+      api.sendMessage("Hello 👨‍⚕️, how can I help you today?", threadID, messageID);
+      api.setMessageReaction("🫀", messageID, () => {}, true);
+      return;
     }
 
     const userPrompt = input || messageReply.body;
-    const basePrompt = `You are Dr. Sammy, a professional medical AI. Answer in 4 lines or less unless giving treatment or instructions. Be kind, clear, and helpful. You may suggest medicine, natural remedies, or lifestyle changes if needed. Respond in the user's language.`;
+    const basePrompt = `You are Dr. Sammy, a professional medical AI. Always answer like a real doctor. Limit response to 4 lines unless giving instructions or medication. You can recommend herbs, natural treatments, or lifestyle changes. Speak in user's language if detected.`;
 
-    const finalPrompt = `${basePrompt}\n\nPatient: ${userPrompt}`;
+    const fullPrompt = `${basePrompt}\n\nPatient says: ${userPrompt}`;
 
+    // Try OpenAI first
     try {
-      const openaiRes = await axios.post(
+      const res = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
           model: "gpt-4",
-          messages: [{ role: "user", content: finalPrompt }],
-          max_tokens: 300,
+          messages: [{ role: "user", content: fullPrompt }],
+          max_tokens: 350,
           temperature: 0.7
         },
         {
@@ -45,24 +48,25 @@ module.exports = {
         }
       );
 
-      const reply = openaiRes.data.choices[0].message.content.trim();
-      return api.sendMessage(reply, threadID, messageID);
-    } catch (err) {
-      console.warn("❌ OpenAI failed. Trying Gemini...");
-
-      // Fallback to Gemini
+      const reply = res.data.choices[0].message.content.trim();
+      api.sendMessage(reply, threadID, messageID);
+      api.setMessageReaction("🫀", messageID, () => {}, true);
+    } catch (error) {
+      // If OpenAI fails, use Gemini fallback
       try {
         const geminiRes = await axios.post(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro-latest:generateContent?key=${GEMINI_KEY}`,
           {
-            contents: [{ role: "user", parts: [{ text: finalPrompt }] }]
+            contents: [{ role: "user", parts: [{ text: fullPrompt }] }]
           }
         );
 
-        const geminiText = geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        return api.sendMessage(geminiText || "Sorry, I couldn't respond.", threadID, messageID);
-      } catch (gErr) {
-        return api.sendMessage("⚠️ I'm unable to respond right now. Please try again later.", threadID, messageID);
+        const reply = geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        api.sendMessage(reply || "Sorry, I'm unable to answer at the moment.", threadID, messageID);
+        api.setMessageReaction("🫀", messageID, () => {}, true);
+      } catch (gemError) {
+        api.sendMessage("⚠️ I'm currently unable to help. Please try again later.", threadID, messageID);
+        api.setMessageReaction("🫀", messageID, () => {}, true);
       }
     }
   }
