@@ -1,87 +1,53 @@
-const axios = require("axios");
-const tinyurl = require("tinyurl");
+const axios = require('axios');
 
 module.exports = {
   config: {
     name: "gemini2",
-    version: "1.0",
-    author: "Samir OE",
+    author: "King Monsterwith",
+    version: "1.7",
     countDown: 5,
     role: 0,
-    category: "google",
-  },
-  onStart: async function ({ message, event, args, commandName }) {
-    try {
-      let shortLink;
-
-      if (event.type === "message_reply") {
-        if (["photo", "sticker"].includes(event.messageReply.attachments?.[0]?.type)) {
-          shortLink = await tinyurl.shorten(event.messageReply.attachments[0].url);
-        }
-      } else {
-        const text = args.join(' ');
-        const response0 = await axios.get(`https://api-samir.onrender.com/Gemini?text=${encodeURIComponent(text)}`);
-
-        if (response0.data && response0.data.candidates && response0.data.candidates.length > 0) {
-          const textContent = response0.data.candidates[0].content.parts[0].text;
-          const ans = `${textContent}`;
-          message.reply({
-            body: ans,
-          }, (err, info) => {
-            global.GoatBot.onReply.set(info.messageID, {
-              commandName,
-              messageID: info.messageID,
-              author: event.senderID,
-            });
-          });
-          return; 
-        }
-      }
-
-      if (!shortLink) {
-        console.error("Error: Invalid message or attachment type");
-        return;
-      }
-
-      const like = `https://api-samir.onrender.com/telegraph?url=${encodeURIComponent(shortLink)}&senderId=Y=777565`;
-      const response4 = await axios.get(like);
-      const link = response4.data.result.link;
-
-      const text = args.join(' ');
-      const vision = `https://api-samir.onrender.com/gemini-pro?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
-
-      const response1 = await axios.get(vision);
-      message.reply({
-        body: response1.data,
-      });
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
+    category: "ai",
+    description: "Chat with Gemini AI",
+    usage: "{prefix}gemini <your message>",
+    language: "en",
+    example: "{prefix}gemini What is quantum computing?"
   },
 
-  onReply: async function ({ message, event, Reply, args }) {
-    try {
-      let { author, commandName } = Reply;
-      if (event.senderID !== author) return;
+  onStart: async function ({ message, event, args }) {
+    const input = args.join(" ");
+    if (!input) return message.reply("💬 Please enter a message to send to Gemini.");
 
-      const gif = args.join(' ');
-      const response23 = await axios.get(`https://api-samir.onrender.com/Gemini?text=${encodeURIComponent(gif)}`);
-
-      if (response23.data && response23.data.candidates && response23.data.candidates.length > 0) {
-        const textContent = response23.data.candidates[0].content.parts[0].text;
-        const wh = `${textContent}`;
-        message.reply({
-          body: wh,
-        }, (err, info) => {
-          global.GoatBot.onReply.set(info.messageID, {
-            commandName,
-            messageID: info.messageID,
-            author: event.senderID,
-          });
-        });
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
+    const reply = await queryGemini(input);
+    return message.reply(reply);
   },
+
+  onReply: async function ({ event, message, Reply, args }) {
+    const input = args.join(" ");
+    const reply = await queryGemini(input);
+    return message.reply(reply);
+  }
 };
+
+// Gemini AI API Call Function
+async function queryGemini(prompt) {
+  const apiKey = "AIzaSyAexh3GFJU3-GFH9cyZlAOrqkr715d8ifM";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro-latest:generateContent?key=${apiKey}`;
+
+  try {
+    const res = await axios.post(url, {
+      contents: [
+        {
+          parts: [{ text: prompt }],
+          role: "user"
+        }
+      ]
+    });
+
+    const reply = res.data.candidates?.[0]?.content?.parts?.[0]?.text;
+    return reply || "⚠️ Gemini didn't return any response.";
+  } catch (err) {
+    console.error("Gemini API Error:", err.response?.data || err.message);
+    return "❌ Error talking to Gemini AI.";
+  }
+      }
