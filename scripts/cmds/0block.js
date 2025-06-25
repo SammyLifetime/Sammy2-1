@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     name: "block",
-    author: "Monsterwith", // Converted by Goatbot Zed
+    author: "Monsterwith", //King Monsterwith 
     role: 2,
     shortDescription: "Block or unblock a user",
     longDescription: "Use 'block' or 'unblock' via command or replying to a user's message",
@@ -28,7 +28,7 @@ module.exports = {
 // Central handler function
 async function handleBlock(api, event, args, isReply) {
   const admins = new Set([
-    "UID1","UID2" // add admin UIDs
+    "61575847331340","UID2" // add admin UIDs
   ]);
   if (!admins.has(event.senderID)) {
     return api.sendMessage(
