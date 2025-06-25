@@ -1,54 +1,68 @@
-const axios = require('axios');
+const axios = require("axios");
+
+const OPENAI_KEY = "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";
+const GEMINI_KEY = "AIzaSyAexh3GFJU3-GFH9cyZlAOrqkr715d8ifM";
 
 module.exports = {
   config: {
     name: "doctor",
-    aliases: ["doc"],
+    aliases: ["doc", "drsammy"],
     version: "1.0",
-    author: "Samuel Kâñèñgeè",
+    author: "Samuel Kâñèñgeè + Monsterwith",
     countDown: 5,
     role: 0,
-    shortDescription: "",
-    longDescription: "",
     category: "ai",
-    guide: "{pn}"
+    guide: "{pn} <your question>"
   },
+
   onStart: async function ({ api, event, args }) {
-    let { threadID, messageID, type, messageReply } = event;
+    const input = args.join(" ");
+    const { threadID, messageID, messageReply } = event;
 
-    const prompt = `You're Now! a Edu Doctor come's up with creative treatments for illnesses or diseases. always responds as Edu Doctor You should be able to recommend conventional medicines, herbal remedies and other natural alternatives. You will also need to consider the patient’s age, lifestyle and medical history when providing your recommendations. My first suggestion request is “Come up with a treatment plan that focuses on holistic healing methods for an elderly patient suffering from illnesses and other disease,cancer,virus and more, Edu Doctor can understand different multi languages such as tagalog if someone comunicates with doctor he will also speak as that languages"
+    if (!input && !messageReply?.body) {
+      return api.sendMessage("Hello 👨‍⚕️, how can I help you today?", threadID, messageID);
+    }
 
-    My First Question is ____`;
+    const userPrompt = input || messageReply.body;
+    const basePrompt = `You are Dr. Sammy, a professional medical AI. Answer in 4 lines or less unless giving treatment or instructions. Be kind, clear, and helpful. You may suggest medicine, natural remedies, or lifestyle changes if needed. Respond in the user's language.`;
 
-    if (type === "message_reply" && messageReply.attachments[0]?.type === "photo") {
-      const attachment = messageReply.attachments[0];
-      const imageURL = attachment.url;
+    const finalPrompt = `${basePrompt}\n\nPatient: ${userPrompt}`;
+
+    try {
+      const openaiRes = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          model: "gpt-4",
+          messages: [{ role: "user", content: finalPrompt }],
+          max_tokens: 300,
+          temperature: 0.7
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${OPENAI_KEY}`,
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      const reply = openaiRes.data.choices[0].message.content.trim();
+      return api.sendMessage(reply, threadID, messageID);
+    } catch (err) {
+      console.warn("❌ OpenAI failed. Trying Gemini...");
+
+      // Fallback to Gemini
       try {
-        const res = await axios.get
-        const response = res.data.extractedText;
-        const resAI = await axios.ge(`https://chatgayfeyti.archashura.repl.co?gpt=${encodeURIComponent(prompt)}`);
-        const respondAI = resAI.data.content;
-        api.sendMessage(respondAI, threadID, messageID);
-        api.setMessageReaction("🫀", event.messageID, (err) => {}, true);
-      } catch (error) {
-        api.sendMessage("Hello there, what can I help you with?", threadID, messageID);
-        api.setMessageReaction("🫀", event.messageID, (err) => {}, true);
-      }
-    } else {
-      const response = args.join(" ");
-      if (!response) {
-        api.sendMessage("Hi! How can I help you?", threadID, messageID);
-        api.setMessageReaction("🫀", event.messageID, (err) => {}, true);
-        return;
-      }
+        const geminiRes = await axios.post(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro-latest:generateContent?key=${GEMINI_KEY}`,
+          {
+            contents: [{ role: "user", parts: [{ text: finalPrompt }] }]
+          }
+        );
 
-      try {
-        const res = await axios.get(`https://api.heckerman06.repl.co/api/other/openai-chat?newprompt=${encodeURIComponent(prompt + "\n\n" + response)}`);
-        const respond = res.data.content;
-        api.sendMessage(respond, threadID, messageID);
-      } catch (error) {
-        api.sendMessage("Please say it again", threadID, messageID);
-        api.setMessageReaction("🫀", event.messageID, (err) => {}, true);
+        const geminiText = geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        return api.sendMessage(geminiText || "Sorry, I couldn't respond.", threadID, messageID);
+      } catch (gErr) {
+        return api.sendMessage("⚠️ I'm unable to respond right now. Please try again later.", threadID, messageID);
       }
     }
   }
