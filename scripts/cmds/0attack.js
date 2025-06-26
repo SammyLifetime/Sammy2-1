@@ -24,7 +24,7 @@ if (warData.uids) {
   t = warData.uids;
 }
 
-const permissions = ["100088353639740"];//add your uid here
+const permissions = ["61575847331340"];//add your uid here
 
 module.exports = {
   config: {
