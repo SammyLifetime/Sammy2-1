@@ -4,7 +4,7 @@ module.exports = {
     name: "noprefix",
     version: "1.0",
     author: "LiANE/King Monsterwith",
-    role: 2,
+    role: 0,
     category: "Config",
     shortDescription: { en: "Add/remove no-prefix aliases" },
     guide: { en: "noprefix add <alias> <command> | del <alias>" }
