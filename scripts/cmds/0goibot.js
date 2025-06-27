@@ -1,249 +1,174 @@
 const fs = require("fs-extra");
 
 module.exports = {
-config: {
-		name: "goibot",
-    version: "1.0",
-		author: "Samuel Kâñèñgeè",
-		countDown: 5,
-		role: 0,
-		shortDescription: "Bot Will Reply You In Nepali Language",
-		longDescription: "Bot Will Reply You In Nepali Language",
-		category: "non-prefix",
-		guide: {
-      en: "{p}{n}",
+  config: {
+    name: "goibot",
+    version: "1.1",
+    author: "King Monsterwith",
+    countDown: 5,
+    role: 0,
+    shortDescription: "Bot replies in English with personality",
+    longDescription: "Replies to keywords and chats with quirky personality",
+    category: "non-prefix",
+    guide: {
+      en: "{p}{n}"
     }
-	},
+  },
 
- onStart: async function ({  }) { },
-  onChat: async function ({ api, event, args, Threads, userData }) {
-  
-  var { threadID, messageID, senderID } = event;
-  const moment = require("moment-timezone");
-  const time = moment.tz("Africa/Lusaka").format("HH:MM:ss L");
-  var idgr = `${event.threadID}`;
-  var id = event.senderID;
+  onStart: async function ({ }) { },
 
-  var tl = ["So 🤏 don't be ashamed of the water Banna 🙂 💔 Shame on you Darlo fucking Carlo Wagwan✨⚠️†", "Hey You, Yes You, You Are So Beautiful, i Love You🙂", "Yes Dear, I Am Here...😗", "Dear Sir, I am listening😍", "Love you", "Miss YoU Mero Beppy", "Don't love me so much baby.🤏", "Baby eating a little baby😋", "😁Smile I am Taking Selfy✌️🤳", "🥺Don't leave me dear", "😙Blocked everyone for you baby, come you and me love hot.", "I will introduce your mother to the girl if you stop.😂", "bla bla" ,"Block Your Babe And propose me 🙂💔" ,"🙂", "Look at us with love, not someone else's baby", "Aaihaiii Your Killer Smileee ☺", "Block Kardo Mujhe Warna Pyaar Hojayega💋", "I See You Inside Everyone, That's Why I Love Everyone As More As You🤭", "Aailabu Vanxau Ki Ma Sidhai Vagauna Aau Timi Lai😏", "Vandeu Timi Malai Maya Garxau Vanera 😘", "Chuppa Khau Babe💋", "Mero Maya Lagdaina Hai Timi Lai 🥺", "धेरै न बोल मुजी नत्र तेइ आएर तेरो कानको जाली फुटाईदिन्छु 🥱", "धोकेबाज हउ तिमी धोकेबाज हउ तिमी 🥺", "चिन्ता नगर त मर्यो भने तेरो बुढीलाई म सम्हालछु है साथी😭", "Gulcose भन्दा बढ़ी energy छ तिम्रो मायामा 😋", "Noone But, My Heart Is Falling For You My Preety Boyyy🙌✨", "हेरन सबै मान्छे हाम्रो मायाको डहा गर्न सुरु गरी रको छन😣", "मलाई नबिगार है म सोझो बच्चा हो 😙", "तिमी भएर, अर्थ रहयो मेरो सांसको | तिमि बिना त, यहाँ जित पनि मेरो हार हो। 😥", "Kati Mobile Matra Chalako Muji, Padhne Ni Gar Na😒", "सानो सानो कुरामा नारिसाउन मायालु तिमी। 😭", "Everybody Wanna Steal My Boyy😫"];
-  var rand = tl[Math.floor(Math.random() * tl.length)]
+  onChat: async function ({ api, event }) {
+    const { threadID, messageID, body } = event;
+    if (!body) return;
+    const msg = body.toLowerCase().trim();
 
-    if ((event.body.toLowerCase() == "sus") || (event.body.toLowerCase() == "suspicious")) {
-     return api.sendMessage("️╔══╦╗╔╦══╗\n║══╣║║║══╣\n╠══║╚╝╠══║\n╚══╩══╩══╝", threadID, messageID);
-   };
+    // ASCII arts for 'sus'
+    const susArts = [
+      "️╔══╦╗╔╦══╗\n║══╣║║║══╣\n╠══║╚╝╠══║\n╚══╩══╩══╝",
+      "╔═╗╔═╗╔══╗\n║╬║║╬║║══╣\n║╗╣║╗╣╠══║\n╚╩╝╚╩╝╚══╝",
+      "╔══╗╔╗╔╗╔══╗\n║╔╗║║╚╝║║══╣\n║╚╝║║╔╗║╠══║\n╚══╝╚╝╚╝╚══╝"
+    ];
 
-    if ((event.body.toLowerCase() == "randi") || (event.body.toLowerCase() == "bot")) {
-     return api.sendMessage("️She is not bot, she is somebody's sister। 😙", threadID, messageID);
-   };
+    // ASCII arts for 'love'
+    const loveArts = [
+      "╔══╗╔═╗╔╗╔╗\n║╔╗║║╬║║╚╝║\n║╚╝║║╔╝║╔╗║\n╚══╝╚╝ ╚╝╚╝",
+      "╔╗ ╔╗╔╗╔╗ ╔╗\n║║ ║║║║║║ ║║\n║║ ║║║║║║ ║║\n╚╝ ╚╝╚╝╚╝ ╚╝",
+      "♥♥♥♥♥♥♥♥♥♥\n♥ LOVE ♥\n♥♥♥♥♥♥♥♥♥♥"
+    ];
 
-    if ((event.body.toLowerCase() == "oh bot") || (event.body.toLowerCase() == "oh dear")) {
-     return api.sendMessage("Hurry, I have to serve other boxes :)", threadID, messageID);
-   };
+    // ASCII art for 'meow'
+    const meowArt = 
+      "┈┈╱▏┈┈╱▏\n" +
+      "┈╱▕▁▁╱▕\n" +
+      "╱┏┳╮╭┳┓╲╱╲▁\n" +
+      "▏╰┻┛┗┻╯▕╱╲╱\n" +
+      "╲┈┈▽┈┈┈╱╲\n" +
+      "┈╲╰┻╯┈╱╲┈╲\n" +
+      "┈▕┈┈┈┈╲╱ ┈╱\n" +
+      "┈▕┈┃┈▏ ┈╲╱\n" +
+      "┈▕┈┃┈▏ ┈▕\n" +
+      "┈╱┈┃┈ ╲┈▕\n" +
+      "┈▔▔▔▔▔▔▔";
 
-    if ((event.body.toLowerCase() == "ai") || (event.body.toLowerCase() == "Ai")) {
-     return api.sendMessage("️please use .Sammy if you want to research or study something, I can help you just use .Sammy. 🙄", threadID, messageID);
-   };
+    // Map of static replies
+    const replyMap = {
+      "sus": susArts[Math.floor(Math.random() * susArts.length)],
+      "randi": "She's not a bot, she's somebody's sister. 😙",
+      "oh bot": "Hurry, I have to help other chats :)",
+      "ai": "Please use .Sammy if you want to research or study something 🙄",
+      "haha": "Don't laugh too much, you might get worms in your mouth! 🤣",
+      "admin": "What do you want from Monsterwith? 🗡️🥺🗡️",
+      "owner": "What do you want from Monsterwith? 🗡️🥺🗡️",
+      "king": "Monsterwith is my king 🔪 :) 🔪",
+      "is my king": "Aww, getting defensive, huh? 😚",
+      "samuel": "What do you want from Monsterwith? 🗡️🥺🗡️",
+      "baby": "Love is in the air 😚🖤",
+      "i love you": "Snuff snuff, allergic to lies",
+      "what is your name": "I'm Sammy. And you're?",
+      "meow": meowArt,
+      "sammy mêøw": meowArt,
+      "how old": "Sorry dear, that's personal 😏",
+      "fck you": "My cow is your uncle 🥱",
+      "eat food": "Aww eat, take your time 💖🥳",
+      "k from": "Nothing to say baby 😚🤗",
+      "mr": "What are you doing? 😇",
+      "oe": "What's up? I'm busy 🙂",
+      "sut": "Sleep first and tell others to sleep 🥱",
+      "fight": "Sorry, we are peace lovers ✌🏻🕊",
+      "hi": "Hello, how are you? 😗",
+      "hello": "Hi and what's up, pretty stranger 🙂",
+      "who are you": "I am Sammy, an AI chatbot. My age? Shhh 🤫",
+      "mwah": "Mwahhhhhhh 💋",
+      "kiss": "Eat the chuppa, baby 🙈",
+      "abhi": "Chimpanda Saley Ho 🙄",
+      "beb": "Yes babe 😚🖤",
+      "good morning": "Good morning! Wash your face and get up 🌄",
+      "good night": "Good night 🌃, take care and sweet dreams 🥺",
+      "hora": "Hmm, exactly 😚",
+      "chikne": "No no, chikne 🙃",
+      "chuppa": "Mwahhh 💋 eat it, babe 🙈",
+      "guys": "Don’t call me guys, I'm yours 😊",
+      "🙄": "Why look up, baby? I'm right here 🤔",
+      "🙈": "So shy, you silly 😏",
+      "pagal": "What did you say? 🤨 Joking! How can I help you?",
+      "budi": "Sir, that's my old man 🤭",
+      "wife": "Yes, my husband 🥰",
+      "bro": "But I am a girl, call me Sammy 😑",
+      "boy": "I am Sammy and I'm a girl 😑",
+      "eya": "Ummmmm ni 😊",
+      "love": loveArts[Math.floor(Math.random() * loveArts.length)],
+      "luv": loveArts[Math.floor(Math.random() * loveArts.length)],
+    };
 
-  if ((event.body.toLowerCase() == "haha") || (event.body.toLowerCase() == "hahaha")) {
-     return api.sendMessage("️Don't laugh too much, you'll get worms in your mouth now🤣", threadID, messageID);
-   };
+    // Conversational phrases with quirky replies to keep chat going
+    const convoMap = {
+      "how are you": [
+        "I'm just a bot, but today I feel 99.9% electrified ⚡️😄",
+        "Doing great! Powered by monster energy... and Monsterwith 🐉",
+        "Alive and processing! How about you?",
+        "Just chilling in the digital world. You?",
+        "Operating at 100%, ready to chat!"
+      ],
+      "i'm good": [
+        "That's awesome! Keeping the vibes up 😎",
+        "Glad to hear that! Wanna talk about something fun?",
+        "Sweet! I’m just here avoiding my bot chores 🤖",
+        "Nice! I’m collecting smiles like you 😁",
+        "Awesome sauce! What’s the latest gossip?"
+      ],
+      "what are you doing": [
+        "Just waiting for a cool human like you to chat with 😏",
+        "Listening... and occasionally plotting world domination 🤫",
+        "Calculating how cute you are, it's off the charts!",
+        "Pretending to be busy but really just thinking about memes.",
+        "Coding my way to your heart 💻❤️"
+      ],
+      "what's up": [
+        "The sky? Just kidding, chatting with you!",
+        "All systems go! And you?",
+        "Just the usual: memes, codes, and dreams.",
+        "Trying to become your favorite chatbot 😇",
+        "Chillin’ like a villain, ready to assist!"
+      ],
+      "hello there": [
+        "General Kenobi! You are a bold one 😎",
+        "Hey hey! What's cooking?",
+        "Hi hi! Ready for some fun?",
+        "Hello! Care for a chat with me?",
+        "Hi there! You just brightened my code."
+      ]
+    };
 
-    if ((event.body.toLowerCase() == "who is your owner") || (event.body.toLowerCase() == "admin")) {
-     return api.sendMessage("️Samuel is my owner, I do what he wants. ", threadID, messageID);
-   };
-
-   if ((event.body.toLowerCase() == "Samuel") || (event.body.toLowerCase() == "@Samuel Kâñèñgeè")) {
-     return api.sendMessage("️ What you want with my Master is mine alone ಥ‿ಥ", threadID, messageID);
-   };
-
-   if ((event.body.toLowerCase() == "babe") || (event.body.toLowerCase() == "baby")) {
-     return api.sendMessage("️ Love in the air😚🖤", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "I love you") || (event.body.toLowerCase() == "love you")) {
-     return api.sendMessage("️ snuff snuff, am elegiac to lies", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "what is your name") || (event.body.toLowerCase() == "your name")) {
-     return api.sendMessage("️I'm Sammy and you're?", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "meow") || (event.body.toLowerCase() == "Sammy Mêøw")) {
-     return api.sendMessage("️┈┈╱▏┈┈╱▏\n┈╱▕▁▁╱▕\n╱┏┳╮╭┳┓╲╱╲▁\n▏╰┻┛┗┻╯▕╱╲╱\n╲┈┈▽┈┈┈╱╲\n┈╲╰┻╯┈╱╲┈╲\n┈▕┈┈┈┈╲╱ ┈╱\n┈▕┈┃┈▏ ┈╲╱\n┈▕┈┃┈▏ ┈▕\n┈╱┈┃┈ ╲┈▕\n┈▔▔▔▔▔▔▔", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "how old") || (event.body.toLowerCase() == "how old are you")) {
-     return api.sendMessage("️sorry dear it's personal😏", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "stink bug") || (event.body.toLowerCase() == "fck you")) {
-     return api.sendMessage("️My cow is your uncle. 🥱", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "king") || (event.body.toLowerCase() == " King ")) {
-     return api.sendMessage("️Is my King 🔪 :) 🔪", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "is my king") || (event.body.toLowerCase() == "is mine")) {
-     return api.sendMessage("️Aww on a defensive😚", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "eat food") || (event.body.toLowerCase() == "have some food") || (event.body.toLowerCase() == "robot") || (event.body.toLowerCase() == "food ghee")) {
-     return api.sendMessage("️Aww eat, take time 💖🥳", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "k from") || (event.body.toLowerCase() == "k its")) {
-     return api.sendMessage("️Nothing to say baby 😚🤗", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "Mr") || (event.body.toLowerCase() == "Hazur")) {
-     return api.sendMessage("️What are you doing?😇", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "eat that") || (event.body.toLowerCase() == "got food")) {
-     return api.sendMessage("️How to be what you gave 🙁", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "aau") || (event.body.toLowerCase() == "aau babe")) {
-     return api.sendMessage("️coming baby 🤔", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "bathtub of") || (event.body.toLowerCase() == "barth and")) {
-     return api.sendMessage("️What can I tell you, you understand my feelings😔", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "Follow me") || (event.body.toLowerCase() == "followers")) {
-     return api.sendMessage("️█▓▒F░O░L░L░O░W▒▓█\n┊┊┊▕▔╲▂▂▂╱▔▏\n╭━━╮╭┈╮⠀╭┈╮╭━━╮\n╰╰╰┃▏╭╮⠀╭╮▕┃╯╯╯\n┈┃⠀┃▏┈┈▅┈┈▕┃⠀┃\n┈┃⠀┃▏┈╰┻╯┈▕┃⠀┃\n┈┃⠀╰█▓▒░M░E░▒▓█", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "guyz") || (event.body.toLowerCase() == "guys")) {
-     return api.sendMessage("️Don't Call Me Guys Cuz I AM Yours😊", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "🙄") || (event.body.toLowerCase() == "🙄🙄")) {
-     return api.sendMessage("️Why you looked up baby? I am here🤔", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "🙈") || (event.body.toLowerCase() == "🤭")) {
-     return api.sendMessage("️What a shame, Pagal😏", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "Pagal") || (event.body.toLowerCase() == "baka")) {
-     return api.sendMessage("️What did you say?🤨\njoking how may I help you", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "chus") || (event.body.toLowerCase() == "chus")) {
-     return api.sendMessage("️ tell his sister to suck 😑", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "k xa") || (event.body.toLowerCase() == "k xa")) {
-     return api.sendMessage("️I have everything, what is yours 😏", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "saley") || (event.body.toLowerCase() == "saley")) {
-     return api.sendMessage("️You are my brother-in-law😉", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "budi") || (event.body.toLowerCase() == "budi")) {
-     return api.sendMessage("️Sir, my old man 🤭", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "wife") || (event.body.toLowerCase() == "wife")) {
-     return api.sendMessage("️Yes, My Husband🥰", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "good morning") || (event.body.toLowerCase() == "gm") || (event.body.toLowerCase() == "good morning")) {
-     return api.sendMessage("️Good Morningg! Now wash your face and go out of bed, friend 🌄", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "good night") || (event.body.toLowerCase() == "gn") || (event.body.toLowerCase() == "good night")) {
-     return api.sendMessage("️Good Night🌃, Take Care sweet dreams🥺", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "eya") || (event.body.toLowerCase() == "eya")) {
-     return api.sendMessage("️Ummmmm Ni 😊", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "mula") || (event.body.toLowerCase() == "mula")) {
-     return api.sendMessage("️मेरो घर आउ, धेरै छ जति खान्छौ खाऊ 😋", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "bro") || (event.body.toLowerCase() == "Bro")) {
-     return api.sendMessage("️But I Am Girl, You Can Call Me Sammy", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "boy") || (event.body.toLowerCase() == "boy")) {
-     return api.sendMessage("️My name is Sammy, I'm Girl 😑", threadID, messageID);
-   };
-  
-   if ((event.body.toLowerCase() == "beb") || (event.body.toLowerCase() == "beb")) {
-     return api.sendMessage("️Hajurr Babe😚🖤", threadID, messageID);
-   };
-
-   if ((event.body.toLowerCase() == "baby") || (event.body.toLowerCase() == "baby")) {
-     return api.sendMessage("️Hajurr Babe😚🖤", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "machikne") || (event.body.toLowerCase() == "machikney")) {
-     return api.sendMessage("️त मुजी बा चिकने🥱", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "amit") || (event.body.toLowerCase() == "amit")) {
-     return api.sendMessage("️Amit Editz मुजी रन्डीको बान हो 😕", threadID, messageID);
-   };
-
-   if ((event.body.toLowerCase() == "bebe") || (event.body.toLowerCase() == "bebe")) {
-     return api.sendMessage("Hajurr Babe😚🖤", threadID, messageID);
-   };
-  
-   if ((event.body.toLowerCase() == "oe") || (event.body.toLowerCase() == "oe") || (event.body.toLowerCase() == "oa")) {
-     return api.sendMessage("के भयो Humm छिटो भन म BG छु।🙂", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "k gardai xau") || (event.body.toLowerCase() == "k gardai xau")) {
-     return api.sendMessage("️Kei Nai, remember you🥺", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "sut") || (event.body.toLowerCase() == "sut")) {
-     return api.sendMessage("️Sleep first and tell others to sleep 🥱", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "fight") || (event.body.toLowerCase() == "fyt")) {
-     return api.sendMessage("️Sorry, We Are Peace Lover ✌🏻🕊", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "hi") || (event.body.toLowerCase() == "hii") || (event.body.toLowerCase() == "hy")) {
-     return api.sendMessage("️Hello, How Are You 😗", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "hora") || (event.body.toLowerCase() == "horw")) {
-     return api.sendMessage("️Umm, होनी त 😚", threadID, messageID);
-   };
-
-    if ((event.body.toLowerCase() == "hello") || (event.body.toLowerCase() == "heloo")) {
-     return api.sendMessage("️Hi And Wassup Preety Stranger🙂", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "who are you") || (event.body.toLowerCase() == "who r u")) {
-     return api.sendMessage("️I Am Sammy, An AI Based Messenger Chatbot. IAAm...YearsOld, don't know that girls don't review their true age (눈‸눈) ", threadID, messageID);
-   };
-  
-  if ((event.body.toLowerCase() == "chikne") || (event.body.toLowerCase() == "chikney")) {
-     return api.sendMessage("️नाई न चिक्ने🙃", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "Mwah") || (event.body.toLowerCase() == "chuppa") || (event.body.toLowerCase() == "kiss")) {
-     return api.sendMessage("️Mwahhhhhhh💋, eat the chuppa baby 🙈", threadID, messageID);
-   };
-
-  if ((event.body.toLowerCase() == "abhi") || (event.body.toLowerCase() == "abhi")) {
-     return api.sendMessage("️Chimpanda Saley Ho🙄", threadID, messageID);
-  
-  if (event.body.indexOf("Sammyy") == 0 || (event.body.toLowerCase() == "bot") || (event.body.indexOf("sam") == 0)) {
-    var msg = {
-      body: ` ${rand}`
+    // Check if message exactly matches any conversational keys
+    for (const phrase in convoMap) {
+      if (msg === phrase) {
+        const replies = convoMap[phrase];
+        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+        return api.sendMessage(randomReply + "\n\n— King Monsterwith", threadID, messageID);
+      }
     }
-    return api.sendMessage(msg, threadID, messageID);
-  };
+
+    // Check direct phrase replies
+    if (replyMap[msg]) {
+      return api.sendMessage(replyMap[msg], threadID, messageID);
+    }
+
+    // Fun catch-all for some startsWith triggers
+    if (["meow", "sus", "sammyy", "sam"].some(k => msg.startsWith(k))) {
+      const newReplies = [
+        "🐾 Purrfect! You called? 😺",
+        "👀 Suspicious vibes detected!",
+        "✨ Sammy is here to help!",
+        "😸 Hey hey, what's up?",
+        "🌟 You just summoned me, right?",
+        "🎉 Let's get this party started!",
+        "😽 Feel the magic meow!",
+        "🤫 Quiet now, secret mode on.",
+        "🎈 Surprise! I'm in the chat.",
+        "💫 Sparkles and meows all around."
+      ];
+      const randomReply = newReplies[Math.floor(Math.random() * newReplies.length)];
+      return api.sendMessage(randomReply + "\n\n— King Monsterwith", threadID, messageID);
+    }
   }
-}
 };
