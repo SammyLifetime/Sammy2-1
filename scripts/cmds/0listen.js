@@ -1,83 +1,97 @@
-const fs = require("fs-extra");
-const axios = require("axios");
+const fs = require("fs");
 const path = require("path");
-const FormData = require("form-data");
-const { getStreamFromURL } = global.utils;
+const axios = require("axios");
 
 module.exports = {
   config: {
     name: "listen",
-    version: "4.3",
-    author: "King Monsterwith",
-    shortDescription: "AI listens and responds in any language with voice",
-    longDescription: "Reply to audio or text, bot replies in voice (.mp3) using GPT-4o",
+    version: "1.5",
+    author: "Monsterwith",
+    countDown: 5,
+    role: 0,
+    shortDescription: { en: "AI audio reply with voice" },
+    longDescription: { en: "Free STT + GPT-4o + voice reply using TTS" },
     category: "ai",
     guide: {
-      en: "{pn} [text or reply to audio/text] — speaks back in any language"
+      en: "{pn} on | off\n{pn} male | female"
     }
   },
 
-  onStart: async function ({ api, event, args, message }) {
-    const userInput = args.join(" ");
-    const repliedMsg = event.messageReply;
-    const audioUrl = repliedMsg?.attachments?.[0]?.url;
-    const isAudioLink = userInput.startsWith("http") && userInput.includes(".mp3");
+  onStart: async function ({ message, event, threadsData, args }) {
+    const threadData = await threadsData.get(event.threadID) || {};
+    const listen = threadData.data?.listen || { enabled: true, voice: "female" };
 
-    let promptText = userInput;
-    const waitMsg = await message.reply("⏳ Please wait, processing...");
+    if (args[0] === "on") listen.enabled = true;
+    else if (args[0] === "off") listen.enabled = false;
+    else if (args[0] === "male" || args[0] === "female") listen.voice = args[0];
+    else return message.reply(`🎧 Listen is ${listen.enabled ? "ON" : "OFF"}, voice: ${listen.voice}`);
+
+    threadData.data = threadData.data || {};
+    threadData.data.listen = listen;
+    await threadsData.set(event.threadID, threadData.data);
+
+    return message.reply(`✅ Listen ${args[0]} successfully.`);
+  },
+
+  onChat: async function ({ message, event, threadsData, getStreamFromAttachment, api }) {
+    const threadData = await threadsData.get(event.threadID);
+    const listen = threadData?.data?.listen;
+
+    if (!listen?.enabled || !event?.attachments?.length) return;
+
+    const audio = event.attachments.find(att => att.type === "audio");
+    if (!audio) return;
+
+    const waitMsg = await api.sendMessage("🎧 Transcribing audio, please wait...", event.threadID);
 
     try {
-      // 🔊 Handle audio input
-      if (audioUrl || isAudioLink) {
-        try {
-          const audioStream = await getStreamFromURL(audioUrl || userInput);
-          const form = new FormData();
-          form.append("file", audioStream, {
-            filename: "audio.mp3",
-            contentType: "audio/mpeg"
-          });
-          form.append("model", "whisper-1");
+      const stream = await getStreamFromAttachment(audio);
+      const tempPath = path.join(__dirname, "cache", `${event.messageID}.mp3`);
+      const writer = fs.createWriteStream(tempPath);
+      stream.pipe(writer);
 
-          const transcript = await axios.post(
-            "https://api.openai.com/v1/audio/transcriptions",
-            form,
-            {
-              headers: {
-                ...form.getHeaders(),
-                Authorization: `Bearer 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`
-              }
-            }
-          );
+      writer.on("finish", async () => {
+        // Upload audio to VozLabs STT
+        const formData = new FormData();
+        formData.append("file", fs.createReadStream(tempPath));
 
-          promptText = transcript.data.text;
-        } catch (err) {
-          await message.unsend(waitMsg.messageID);
-          const error = err.response?.data?.error?.message || err.message;
-          return message.reply(`❌ Whisper API error: ${error}`);
-        }
-      } else if (repliedMsg?.body && !userInput) {
-        promptText = repliedMsg.body;
-      }
+        const sttRes = await axios.post("https://api.vozlabs.net/stt", formData, {
+          headers: formData.getHeaders()
+        });
 
-      if (!promptText) {
-        await message.unsend(waitMsg.messageID);
-        return message.reply("❗ Please reply with audio or type your message.");
-      }
+        const transcript = sttRes.data?.text || "I couldn’t understand the audio.";
+        fs.unlinkSync(tempPath);
 
-      // 🌍 Language detection
-      let langCode = "en";
-      try {
-        const detectRes = await axios.post(
-          "https://ws.detectlanguage.com/0.2/detect",
-          new URLSearchParams({ q: promptText }).toString(),
-          {
-            headers: {
-              Authorization: "Bearer eb0606981823c877e0adca305512a01b",
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
+        // GPT-4o response
+        const gptRes = await axios.post("https://api.openai.com/v1/chat/completions", {
+          model: "gpt-4o",
+          messages: [{ role: "user", content: transcript }]
+        }, {
+          headers: {
+            Authorization: `Bearer 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`
           }
-        );
-        langCode = detectRes.data.data.detections[0]?.language || "en";
-      } catch (err) {
-        console.error("Language detection failed:", err.messag
-      
+        });
+
+        const reply = gptRes.data.choices[0].message.content;
+        const voice = listen.voice || "female";
+
+        // Get TTS reply (no key needed)
+        const ttsUrl = `https://api.monsterapi.ai/tts?text=${encodeURIComponent(reply)}&voice=${voice}`;
+        const ttsRes = await axios.get(ttsUrl, { responseType: "arraybuffer" });
+        const ttsPath = path.join(__dirname, "cache", `${event.messageID}_tts.mp3`);
+        fs.writeFileSync(ttsPath, ttsRes.data);
+
+        await api.unsendMessage(waitMsg.messageID);
+        return api.sendMessage({
+          body: reply,
+          attachment: fs.createReadStream(ttsPath)
+        }, event.threadID, () => fs.unlinkSync(ttsPath));
+      });
+    } catch (err) {
+      console.error("Listen+TTS Error:", err);
+      await api.unsendMessage(waitMsg.messageID);
+      return api.sendMessage("❌ Error transcribing or replying to audio.", event.threadID);
+    }
+  }
+};
+                                             
