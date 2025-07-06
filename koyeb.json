@@ -1,0 +1,23 @@
+{
+  "name": "goatbot",
+  "routes": [
+    {
+      "path": "/",
+      "target": "goatbot-service"
+    }
+  ],
+  "services": [
+    {
+      "name": "goatbot-service",
+      "git": {
+        "repository": "https://github.com/monsterwith q/sammy"
+      },
+      "build_command": "npm install",
+      "run_command": "npm start",
+      "env": {
+        "FB_EMAIL": "your-email",
+        "FB_PASSWORD": "your-password"
+      }
+    }
+  ]
+}
