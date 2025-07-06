@@ -71,8 +71,8 @@
   "credentials": {
     "gmailAccount": {
       "email": "sammynewlife1@gmail.com",
-      "clientId": "858146519569-d3vfs5gqb4pkmov21e543ald5g4csb74.apps.googleusercontent.com",
-      "clientSecret": "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",
+      "clientId": "396194006847-jfriakhkikobbvnks01o26njsf078kk0.apps.googleusercontent.com",
+      "clientSecret": "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",
       "refreshToken": "1//048pvF6thGW4TCgYIARAAGAQSNwF-L9IrmW5xbtCCT08_gku8Sss5h2SYtX50xnM4-LAFHV0V8MpnE9N7SXwLSCCr1Na3qr__1lc",
       "apiKey": "ya29.a0AS3H6NyXCopLZ9tTnu5dPCFDe7iikVy3-qtodw7XimF2TTkBOS7cZ79hN97GcCB6di4J_xkvN1Mn5aKQI3jsM386xQOalWEMgXnQN_q5YtyAJ_xvfAzroQi6ZPfXdVY7Xl-xrkxt8wgs27J7cVR1dEYBXXSsiOyAJribZN-FaCgYKAbwSARYSFQHGX2MiLTIxrbBVQio53vF_BOxX0A0175"
     },
@@ -84,7 +84,7 @@
   "dashBoard": {
     "enable": true,
     "expireVerifyCode": 7776000000,
-    "port": 500
+    "port": 3000
   },
   "serverUptime": {
     "enable": true,
