@@ -1,33 +1,18 @@
-# -------- Stage 1: Install dependencies --------
-FROM node:18-slim AS builder
-WORKDIR /usr/src/app
+# Base image
+FROM node:16
 
-# Copy lockfile and package file to install exact deps, then cache
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install
 
-# Copy application source code
+# Copy the rest of the app
 COPY . .
 
-# If you have a build step (e.g. TypeScript), run it here
-# RUN npm run build
-
-# -------- Stage 2: Create production image --------
-FROM node:18-slim AS runner
-WORKDIR /usr/src/app
-
-# Copy only production node_modules and built code (if any)
-COPY --from=builder /usr/src/app/node_modules ./node_modules
-COPY --from=builder /usr/src/app ./
-
-# Use a non-root user for security
-USER node
-
-# (Optional) expose port for documentation; Koyeb/Railway set PORT env automatically
+# Expose the port if needed (optional, for web hooks or express)
 EXPOSE 3000
-
-# Production environment variable
-ENV NODE_ENV=production
 
 # Start the bot
 CMD ["node", "index.js"]
