@@ -1,25 +1,7 @@
 {
-  "0": "U",
-  "1": "p",
-  "2": "d",
-  "3": "a",
-  "4": "t",
-  "5": "e",
-  "6": " ",
-  "7": "c",
-  "8": "o",
-  "9": "n",
-  "10": "f",
-  "11": "i",
-  "12": "g",
-  "13": ".",
-  "14": "j",
-  "15": "s",
-  "16": "o",
-  "17": "n",
   "facebookAccount": {
-    "email": "sammynewlife1@gmail.com",
-    "password": "King k7634",
+    "email": "",
+    "password": "",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -30,84 +12,76 @@
   "antiInbox": false,
   "language": "en",
   "notesLanguage": "change to your language with ISO 639-1 code, available languages: vi (Vietnamese), en (English)",
+  "nickNameBot": "۞𝑺𝑨𝑴𝑴𝒀۞",
+  "prefix": ".",
   "adminOnly": {
     "enable": false,
     "ignoreCommand": []
   },
-  "vipUser": [
-    "61575847331340",
-    "61557662174248"
-  ],
   "adminBot": [
-    "61575847331340",
-    "61557662174248"
-  ],
-  "GOD": [
-    "61575847331340",
-    "61557662174248"
-  ],
-  "DEV": [
-    "61575847331340",
-    "61557662174248"
+    "61575847331340"
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [
-      "61575847331340",
-      "61557662174248"
+      "61575847331340"
     ],
-    "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
+    "notes": "if you enable this feature, only the ids in the whiteListIds list can use the bot"
   },
-  "nickNameBot": "۞𝑺𝑨𝑴𝑴𝒀۞",
-  "prefix": ".",
+  "whiteListModeThread": {
+    "enable": false,
+    "whiteListThreadIds": [],
+    "notes": "if you enable this feature, only the thread in the whiteListThreadIds list can use the bot",
+    "how_it_work": "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
+  },
   "database": {
-    "type": "json",
+    "type": "sqlite",
     "uriMongodb": "",
     "autoSyncWhenStart": false,
     "autoRefreshThreadInfoFirstTime": true,
     "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
   },
-  "timeZone": "Africa/Lusaka",
+  "timeZone": "Asia/Dhaka",
   "credentials": {
     "gmailAccount": {
-      "email": "sammynewlife1@gmail.com",
-      "clientId": "396194006847-jfriakhkikobbvnks01o26njsf078kk0.apps.googleusercontent.com",
-      "clientSecret": "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",
-      "refreshToken": "1//048pvF6thGW4TCgYIARAAGAQSNwF-L9IrmW5xbtCCT08_gku8Sss5h2SYtX50xnM4-LAFHV0V8MpnE9N7SXwLSCCr1Na3qr__1lc",
-      "apiKey": "ya29.a0AS3H6NyXCopLZ9tTnu5dPCFDe7iikVy3-qtodw7XimF2TTkBOS7cZ79hN97GcCB6di4J_xkvN1Mn5aKQI3jsM386xQOalWEMgXnQN_q5YtyAJ_xvfAzroQi6ZPfXdVY7Xl-xrkxt8wgs27J7cVR1dEYBXXSsiOyAJribZN-FaCgYKAbwSARYSFQHGX2MiLTIxrbBVQio53vF_BOxX0A0175"
+      "email": "botofnexxo@gmail.com",
+      "clientId": "848792512039-g3mlfd39p9ttu82ga4kahk6kadjr0hcp.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04nBMNYnfbedsCgYIARAAGAQSNwF-L9IrmyZIKKZaDmN9aqXhIuO1wxk2jpkXPf3zuL_KN-IU99BNhW7eUGCFrDr0hJetNkBFExg",
+      "apiKey": ""
     },
     "gRecaptcha": {
-      "siteKey": "6LdHqnkrAAAAAIw4Qavv6ujQOA74N5omkY5yMEvw",
-      "secretKey": "6LdHqnkrAAAAAM0ZGEp2rgSmrjFYSzTeiRmJ1SAO"
+      "siteKey": "6LfU0TUrAAAAAJVy_tm-q9xlEIEeyBK4N8VwuGdZ",
+      "secretKey": "6LfU0TUrAAAAAOR_CE7oZV-8Eo83LsJmb12-lWFb"
     }
   },
   "dashBoard": {
     "enable": true,
-    "expireVerifyCode": 7776000000,
-    "port": 3000
+    "expireVerifyCode": 300000,
+    "port": 3001
   },
   "serverUptime": {
-    "enable": true,
-    "port": 3000,
+    "enable": false,
+    "port": 3001,
     "socket": {
       "enable": true,
       "channelName": "uptime",
-      "verifyToken": "u1940319-ea7f101121162c69af48f6ce"
+      "verifyToken": ""
     }
   },
   "autoRestart": {
-    "time": 0,
+    "time": null,
     "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
   },
   "autoUptime": {
-    "enable": true,
+    "enable": false,
     "timeInterval": 180,
-    "url": "https://uptimerobot.com/",
+    "url": "",
     "notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
   },
   "autoLoadScripts": {
-    "enable": true,
-    "ignoreCmds": "0spy.js",
+    "enable": false,
+    "ignoreCmds": "",
     "ignoreEvents": "",
     "notes": "this feature will automatically load the script when scripts have been changed, you can set ignoreCmds to ignore commands, ignoreEvents to ignore events, separate by comma or space, example: \"cmd1.js cmd2.js cmd3.js\" (without backslash)"
   },
@@ -116,7 +90,7 @@
   "autoRestartWhenListenMqttError": false,
   "restartListenMqtt": {
     "enable": true,
-    "timeRestart": 86400000,
+    "timeRestart": 3600000,
     "delayAfterStopListening": 2000,
     "logNoti": true,
     "notes": "the value of timeRestart and delayAfterStopListening is milisecond, You shouldn't edit this if you don't know what it is"
@@ -129,14 +103,14 @@
       "note": "Bot will use gmailAccount to send email to emailGetNoti, can send notifications to many email, separate by comma or space, example: \"example1@gmail.com example2@gmail.com\" (without backslash)"
     },
     "telegram": {
-      "enable": true,
-      "botToken": "6594328136:AAFKVS7hHpTMQWDO0Pk0cmqLjLLOPOVZGWQ",
-      "chatId": "@King_Monsterwith_Bot",
+      "enable": false,
+      "botToken": "",
+      "chatId": "",
       "note": "Can send notifications to many chatId, separate by comma or space, example: \"123456789 987654321\" (without backslash)"
     },
     "discordHook": {
-      "enable": true,
-      "webhookUrl": "https://discord.com/api/webhooks/1209200055911972884/a67WAWxOnwurR_TqrMj1E__LIQHy8NU6nSc-NdnmnONKX1k2GWEK8hz3XY15bBu0gMWg",
+      "enable": false,
+      "webhookUrl": "",
       "note": "Can send notifications to many webhookUrl, separate by comma or space, example: \"https://discord.com/api/webhooks/123456789/123456789 https://discord.com/api/webhooks/987654321/987654321\" (without backslash)"
     }
   },
@@ -145,7 +119,9 @@
     "adminOnly": false,
     "threadBanned": false,
     "userBanned": false,
-    "needRoleToUseCmd": false
+    "needRoleToUseCmd": false,
+    "needRoleToUseCmdOnReply": false,
+    "needRoleToUseCmdOnReaction": false
   },
   "logEvents": {
     "disableAll": false,
@@ -166,20 +142,8 @@
     "logLevel": "error",
     "selfListen": false,
     "selfListenEvent": true,
-    "autoMarkDelivery": true,
-    "autoReconnect": true,
+    "autoMarkDelivery": false,
+    "autoReconnect": false,
     "notes": "Document here: https://github.com/ntkhang03/fb-chat-api/blob/master/DOCS.md#apisetoptionsoptions "
-  },
-  "whiteListModeThread": {
-    "enable": false,
-    "whiteListThreadIds": [],
-    "notes": "if you enable this feature, only the thread in the whiteListThreadIds list can use the bot",
-    "how_it_work": "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
-  },
-  "blackListModeThread": {
-    "enable": false,
-    "blackListThreadIds": [],
-    "notes": "if you enable this feature, only the thread in the BlackListThreadIds list can use the bot",
-    "how_it_work": "if you enable both BlackListMode and BlackListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
   }
 }
