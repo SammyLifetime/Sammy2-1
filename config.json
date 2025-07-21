@@ -18,7 +18,7 @@
   "16": "o",
   "17": "n",
   "facebookAccount": {
-    "email": "sammynewlife7@gmail.com",
+    "email": "sammynewlife9@gmail.com",
     "password": "King k763",
     "2FASecret": "",
     "i_user": "",
@@ -62,19 +62,19 @@
     "autoRefreshThreadInfoFirstTime": true,
     "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
   },
-  "timeZone": "Africa/Lusaka",
+  "timeZone": "Africa/lusaka",
   "credentials": {
     "gmailAccount": {
-      "email": "sammynewlife1@gmail.com",
-      "clientId": "858146519569-d3vfs5gqb4pkmov21e543ald5g4csb74.apps.googleusercontent.com",
-      "clientSecret": "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",
-      "refreshToken": "1//04C5MU3qcm0KOCgYIARAAGAQSNwF-L9IrkH9kbjmYbtWH_Hvq1JjmwKXrxsE5ZOFuuY0NA_mVOOSZAwOREluFQSPd3wY9r8xCMVA",
-      "apiKey": "ya29.a0AW4XtxiVd4TX9GwHemXMWD9owK8aTzuEnx8BPTYgRVeegsS8_GP5IR1rKooXnCaXl77CJ3mGkJns4AaMuZqqrmYP8ZmC3qTNpAp3odCygSEcyBOWlAPa_-eviP-asPlWMOImHHG4QkP0xCOkmsBHI2huaPM-b5ORUrVkImzuaCgYKARsSARYSFQHGX2MilOwjKGTmrqBNI_Gj2xGvzA0175"
+      "email": "minatocode444@gmail.com",
+      "clientId": "1041515077310-384cnr5aqm3cdj9v02d0tq73svm2k7ak.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04ywo_EqGdDHECgYIARAAGAQSNwF-L9IrNtLWXqsm4QQYXdqJiiabAe1dbTEcINyPYJtd0S3pNMPPfVIefgt7XwwyxO3Be2liqes",
+      "apiKey": ""
     },
     "gRecaptcha": {
-      "siteKey": "6Lcy_zQrAAAAAGUz7E8EjCMe2PDfRDxxy2m-ygt_",
-      "secretKey": "6Lcy_zQrAAAAABWtuGU9-9wecdQo_EYsdmrx_ECW"
-    }
+      "siteKey": "6LfR_XMrAAAAAGe6VSHlitLyRrQ2cmO7nD6L1LLU",
+      "secretKey": "6LfR_XMrAAAAAO0TdvPuKuNC8NB8Ar7ink_wvIqe"
+}
   },
   "dashBoard": {
     "enable": true,
